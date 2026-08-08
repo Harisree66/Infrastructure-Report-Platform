@@ -1,0 +1,1380 @@
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Staff Dashboard</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f2f6fa;
+}
+
+header {
+    background: #2196d3;
+    color: white;
+    padding: 20px;
+}
+
+.header-content {
+    width: 92%;
+    max-width: 1100px;
+    margin: auto;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-content h1 {
+    margin: 0;
+}
+
+.logout-btn {
+    background: white;
+    color: #2196d3;
+    border: none;
+    padding: 11px 20px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.logout-btn:hover {
+    background: #eeeeee;
+}
+
+.container {
+    width: 92%;
+    max-width: 1100px;
+    margin: 30px auto;
+}
+
+/* WELCOME */
+
+.welcome-box {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+
+    box-shadow:
+        0 3px 12px rgba(0,0,0,0.1);
+}
+
+.welcome-box h2 {
+    color: #2196d3;
+    margin-top: 0;
+}
+
+/* NOTIFICATION */
+
+.notification-box {
+    background: #fff3cd;
+    border-left: 6px solid #ffc107;
+
+    padding: 18px;
+
+    border-radius: 8px;
+
+    margin-bottom: 20px;
+}
+
+.notification-box h3 {
+    margin-top: 0;
+    color: #856404;
+}
+
+.notification-item {
+    background: white;
+
+    padding: 12px;
+
+    margin-top: 10px;
+
+    border-radius: 7px;
+
+    border: 1px solid #ffe69c;
+}
+
+/* BUTTON */
+
+.refresh-btn {
+    background: #2196d3;
+
+    color: white;
+
+    border: none;
+
+    padding: 12px 22px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+    margin-bottom: 20px;
+}
+
+.refresh-btn:hover {
+    background: #1976b5;
+}
+
+/* REPORT CARD */
+
+.report-card {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 3px 12px rgba(0,0,0,0.12);
+}
+
+.report-title {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    border-bottom: 1px solid #ddd;
+
+    padding-bottom: 15px;
+
+    margin-bottom: 20px;
+}
+
+.report-title h2 {
+    margin: 0;
+    color: #333;
+}
+
+/* STATUS */
+
+.status {
+    padding: 8px 15px;
+
+    border-radius: 20px;
+
+    font-weight: bold;
+}
+
+.pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.in-progress {
+    background: #cfe2ff;
+    color: #084298;
+}
+
+.resolved {
+    background: #d1e7dd;
+    color: #0f5132;
+}
+
+.rejected {
+    background: #f8d7da;
+    color: #842029;
+}
+
+/* DETAILS */
+
+.details {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 15px;
+}
+
+.detail-box {
+    background: #f8f9fa;
+
+    padding: 13px;
+
+    border-radius: 8px;
+}
+
+/* DESCRIPTION */
+
+.description-box {
+    margin-top: 15px;
+
+    background: #f8f9fa;
+
+    padding: 15px;
+
+    border-radius: 8px;
+}
+
+.description-text {
+    margin-top: 8px;
+
+    line-height: 1.6;
+}
+
+/* GPS */
+
+.gps-box {
+    margin-top: 15px;
+
+    background: #eef8ff;
+
+    border: 1px solid #2196d3;
+
+    padding: 15px;
+
+    border-radius: 8px;
+}
+
+.map-btn {
+    display: inline-block;
+
+    margin-top: 10px;
+
+    background: #2196d3;
+
+    color: white;
+
+    padding: 9px 15px;
+
+    border-radius: 6px;
+
+    text-decoration: none;
+}
+
+/* PHOTO */
+
+.photo-box {
+    margin-top: 20px;
+}
+
+.report-photo {
+    width: 100%;
+
+    max-width: 450px;
+
+    max-height: 350px;
+
+    object-fit: contain;
+
+    border-radius: 10px;
+
+    border: 2px solid #ddd;
+}
+
+/* ASSIGNED */
+
+.assigned-box {
+    margin-top: 20px;
+
+    background: #e8f5e9;
+
+    border-left: 5px solid #28a745;
+
+    padding: 15px;
+
+    border-radius: 7px;
+}
+
+/* UPDATE */
+
+.update-box {
+    border-top: 1px solid #ddd;
+
+    margin-top: 20px;
+
+    padding-top: 20px;
+}
+
+.status-select {
+    width: 100%;
+
+    max-width: 300px;
+
+    padding: 11px;
+
+    border: 2px solid #ccc;
+
+    border-radius: 7px;
+
+    font-size: 16px;
+}
+
+.update-btn {
+    display: block;
+
+    margin-top: 10px;
+
+    padding: 11px 20px;
+
+    background: #28a745;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+}
+
+.update-btn:hover {
+    background: #218838;
+}
+
+/* NO REPORT */
+
+.no-reports {
+    background: white;
+
+    padding: 40px;
+
+    text-align: center;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 3px 12px rgba(0,0,0,0.1);
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    .header-content {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+    .details {
+        grid-template-columns: 1fr;
+    }
+
+    .report-title {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 10px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ======================================
+     HEADER
+====================================== -->
+
+<header>
+
+<div class="header-content">
+
+<div>
+
+<h1>
+Staff Dashboard
+</h1>
+
+<p>
+Assigned Complaint Management
+</p>
+
+</div>
+
+
+<button
+class="logout-btn"
+id="logoutBtn">
+
+Logout
+
+</button>
+
+</div>
+
+</header>
+
+
+
+<div class="container">
+
+
+<!-- ======================================
+     WELCOME
+====================================== -->
+
+<div class="welcome-box">
+
+<h2 id="welcomeText">
+Welcome, Staff
+</h2>
+
+<p>
+View complaints assigned to you,
+check the problem photo and GPS location,
+and update the work status.
+</p>
+
+</div>
+
+
+
+<!-- ======================================
+     NOTIFICATION
+====================================== -->
+
+<div
+class="notification-box"
+id="notificationBox"
+style="display:none;">
+
+<h3>
+🔔 New Assignment
+</h3>
+
+<div id="notificationList"></div>
+
+</div>
+
+
+
+<!-- ======================================
+     REFRESH
+====================================== -->
+<button
+    type="button"
+    class="refresh-btn"
+    id="refreshBtn"
+    onclick="refreshReports()">
+
+    🔄 Refresh Reports
+
+</button>
+
+
+
+<!-- ======================================
+     REPORT LIST
+====================================== -->
+
+<div id="reportList"></div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* ==========================================
+   STAFF LIST
+========================================== */
+
+const staffMembers = [
+
+    {
+        id: "STAFF001",
+        name: "Arun"
+    },
+
+    {
+        id: "STAFF002",
+        name: "Priya"
+    },
+
+    {
+        id: "STAFF003",
+        name: "Karthik"
+    },
+
+    {
+        id: "STAFF004",
+        name: "Divya"
+    }
+
+];
+
+
+
+/* ==========================================
+   GET CURRENT STAFF
+========================================== */
+
+function getCurrentStaff() {
+
+    /*
+       Change this value according to
+       the staff login.
+    */
+
+    let staffId =
+        localStorage.getItem("currentStaffId");
+
+
+    /*
+       If no staff is selected,
+       use STAFF001 for testing.
+    */
+
+    if (!staffId) {
+
+        staffId = "STAFF001";
+
+        localStorage.setItem(
+            "currentStaffId",
+            staffId
+        );
+
+    }
+
+
+    return staffMembers.find(
+        function(staff) {
+
+            return staff.id === staffId;
+
+        }
+    );
+
+}
+
+
+
+/* ==========================================
+   GET REPORTS
+========================================== */
+
+function getReports() {
+
+    const data =
+        localStorage.getItem("reports");
+
+
+    if (!data) {
+
+        return [];
+
+    }
+
+
+    try {
+
+        const reports =
+            JSON.parse(data);
+
+
+        if (Array.isArray(reports)) {
+
+            return reports;
+
+        }
+
+
+        return [];
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Error loading reports:",
+            error
+        );
+
+        return [];
+
+    }
+
+}
+
+
+
+/* ==========================================
+   SAVE REPORTS
+========================================== */
+
+function saveReports(reports) {
+
+    localStorage.setItem(
+        "reports",
+        JSON.stringify(reports)
+    );
+
+}
+
+
+
+/* ==========================================
+   STATUS CLASS
+========================================== */
+
+function getStatusClass(status) {
+
+    if (status === "In Progress") {
+
+        return "in-progress";
+
+    }
+
+
+    if (status === "Resolved") {
+
+        return "resolved";
+
+    }
+
+
+    if (status === "Rejected") {
+
+        return "rejected";
+
+    }
+
+
+    return "pending";
+
+}
+
+
+
+/* ==========================================
+   LOAD STAFF DASHBOARD
+========================================== */
+
+function loadReports() {
+
+    const reportList =
+        document.getElementById(
+            "reportList"
+        );
+
+
+    const notificationBox =
+        document.getElementById(
+            "notificationBox"
+        );
+
+
+    const notificationList =
+        document.getElementById(
+            "notificationList"
+        );
+
+
+    const staff =
+        getCurrentStaff();
+
+
+    /* STAFF NAME */
+
+    document.getElementById(
+        "welcomeText"
+    ).innerHTML =
+
+        "Welcome, " +
+        staff.name;
+
+
+
+    const reports =
+        getReports();
+
+
+    reportList.innerHTML = "";
+
+    notificationList.innerHTML = "";
+
+
+    /* ======================================
+       ONLY ASSIGNED REPORTS
+    ====================================== */
+
+    const assignedReports =
+        reports.filter(
+            function(report) {
+
+                return (
+                    report.assignedStaffId ===
+                    staff.id
+                );
+
+            }
+        );
+
+
+
+    /* ======================================
+       NEW NOTIFICATIONS
+    ====================================== */
+
+    const newAssignments =
+        assignedReports.filter(
+            function(report) {
+
+                return (
+                    report.assignmentSeen !== true
+                );
+
+            }
+        );
+
+
+    if (newAssignments.length > 0) {
+
+        notificationBox.style.display =
+            "block";
+
+
+        newAssignments.forEach(
+            function(report) {
+
+                const item =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                item.className =
+                    "notification-item";
+
+
+                item.innerHTML = `
+
+                    <strong>
+                        New complaint assigned
+                    </strong>
+
+                    <br>
+
+                    Report ID:
+                    ${report.id || "N/A"}
+
+                    <br>
+
+                    Category:
+                    ${report.category || "N/A"}
+
+                    <br>
+
+                    <small>
+                        Please check the complaint
+                        and start the work.
+                    </small>
+
+                `;
+
+
+                notificationList.appendChild(
+                    item
+                );
+
+            }
+        );
+
+    }
+
+    else {
+
+        notificationBox.style.display =
+            "none";
+
+    }
+
+
+
+    /* ======================================
+       NO ASSIGNED REPORTS
+    ====================================== */
+
+    if (assignedReports.length === 0) {
+
+        reportList.innerHTML = `
+
+            <div class="no-reports">
+
+                <h2>
+                    No Complaints Assigned
+                </h2>
+
+                <p>
+                    You currently have no complaints
+                    assigned to you.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+
+    /* ======================================
+       NEWEST FIRST
+    ====================================== */
+
+    const displayReports =
+        [...assignedReports].reverse();
+
+
+
+    displayReports.forEach(
+        function(report) {
+
+
+            /* ORIGINAL INDEX */
+
+            const originalIndex =
+                reports.findIndex(
+                    function(item) {
+
+                        return String(
+                            item.id
+                        ) === String(
+                            report.id
+                        );
+
+                    }
+                );
+
+
+
+            const status =
+                report.status ||
+                "Pending";
+
+
+            const statusClass =
+                getStatusClass(status);
+
+
+
+            /* =================================
+               PHOTO
+            ================================= */
+
+            let photoHTML = "";
+
+
+            if (report.photo) {
+
+                photoHTML = `
+
+                    <div class="photo-box">
+
+                        <h3>
+                            📷 Problem Photo
+                        </h3>
+
+                        <img
+                            src="${report.photo}"
+                            class="report-photo"
+                            alt="Problem Photo">
+
+                    </div>
+
+                `;
+
+            }
+
+            else {
+
+                photoHTML = `
+
+                    <div class="photo-box">
+
+                        <p>
+                            📷 No photo uploaded.
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+
+
+            /* =================================
+               GPS
+            ================================= */
+
+            let gpsHTML = "";
+
+
+            if (
+                report.latitude !== undefined &&
+                report.latitude !== null &&
+                report.longitude !== undefined &&
+                report.longitude !== null
+            ) {
+
+
+                const mapURL =
+                    "https://www.google.com/maps?q=" +
+                    encodeURIComponent(
+                        report.latitude +
+                        "," +
+                        report.longitude
+                    );
+
+
+                gpsHTML = `
+
+                    <div class="gps-box">
+
+                        <strong>
+                            📍 GPS Location
+                        </strong>
+
+                        <p>
+                            Latitude:
+                            ${report.latitude}
+                        </p>
+
+                        <p>
+                            Longitude:
+                            ${report.longitude}
+                        </p>
+
+                        <a
+                            href="${mapURL}"
+                            target="_blank"
+                            class="map-btn">
+
+                            🗺️ View Location
+
+                        </a>
+
+                    </div>
+
+                `;
+
+            }
+
+            else {
+
+                gpsHTML = `
+
+                    <div class="gps-box">
+
+                        ❌ GPS location not available.
+
+                    </div>
+
+                `;
+
+            }
+
+
+
+            /* =================================
+               REPORT CARD
+            ================================= */
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "report-card";
+
+
+            card.innerHTML = `
+
+                <div class="report-title">
+
+                    <h2>
+                        ${report.category ||
+                        "Issue Report"}
+                    </h2>
+
+                    <span
+                        class="status ${statusClass}">
+
+                        ${status}
+
+                    </span>
+
+                </div>
+
+
+                <div class="details">
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            Report ID
+                        </strong>
+
+                        <br>
+
+                        ${report.id || "N/A"}
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            Date
+                        </strong>
+
+                        <br>
+
+                        ${report.date || "N/A"}
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            Category
+                        </strong>
+
+                        <br>
+
+                        ${report.category || "N/A"}
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            Address
+                        </strong>
+
+                        <br>
+
+                        ${report.address || "N/A"}
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- ASSIGNED STAFF -->
+
+                <div class="assigned-box">
+
+                    👷 <strong>
+                        Assigned Staff:
+                    </strong>
+
+                    ${report.assignedStaff ||
+                    staff.name}
+
+                </div>
+
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="description-box">
+
+                    <strong>
+                        Problem Description
+                    </strong>
+
+                    <div class="description-text">
+
+                        ${report.description ||
+                        "No description provided."}
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- GPS -->
+
+                ${gpsHTML}
+
+
+
+                <!-- PHOTO -->
+
+                ${photoHTML}
+
+
+
+                <!-- UPDATE -->
+
+                <div class="update-box">
+
+                    <strong>
+                        Update Work Status
+                    </strong>
+
+                    <br>
+                    <br>
+
+
+                    <select
+                        class="status-select"
+                        data-index="${originalIndex}">
+
+                        <option
+                            value="Pending"
+                            ${status === "Pending"
+                            ? "selected"
+                            : ""}>
+
+                            Pending
+
+                        </option>
+
+
+                        <option
+                            value="In Progress"
+                            ${status === "In Progress"
+                            ? "selected"
+                            : ""}>
+
+                            In Progress
+
+                        </option>
+
+
+                        <option
+                            value="Resolved"
+                            ${status === "Resolved"
+                            ? "selected"
+                            : ""}>
+
+                            Resolved
+
+                        </option>
+
+
+                    </select>
+
+
+                    <button
+                        class="update-btn"
+                        data-index="${originalIndex}">
+
+                        Update Status
+
+                    </button>
+
+                </div>
+
+            `;
+
+
+            reportList.appendChild(
+                card
+            );
+
+        }
+    );
+
+
+
+    /* ======================================
+       UPDATE BUTTON
+    ====================================== */
+
+    document
+        .querySelectorAll(
+            ".update-btn"
+        )
+        .forEach(
+            function(button) {
+
+                button.addEventListener(
+                    "click",
+                    function() {
+
+                        const index =
+                            Number(
+                                this.dataset.index
+                            );
+
+
+                        updateStatus(index);
+
+                    }
+                );
+
+            }
+        );
+
+}
+
+
+
+/* ==========================================
+   UPDATE STATUS
+========================================== */
+
+function updateStatus(index) {
+
+    const reports =
+        getReports();
+
+
+    if (
+        index < 0 ||
+        index >= reports.length
+    ) {
+
+        alert(
+            "Report not found."
+        );
+
+        return;
+
+    }
+
+
+    const select =
+        document.querySelector(
+            '.status-select[data-index="' +
+            index +
+            '"]'
+        );
+
+
+    if (!select) {
+
+        alert(
+            "Status selection not found."
+        );
+
+        return;
+
+    }
+
+
+    reports[index].status =
+        select.value;
+
+
+    /*
+       Once staff opens/updates the report,
+       the assignment notification is marked seen.
+    */
+
+    reports[index].assignmentSeen =
+        true;
+
+
+    saveReports(reports);
+
+
+    alert(
+        "Status updated successfully!"
+    );
+
+
+    loadReports();
+
+}
+
+
+
+/* ==========================================
+   REFRESH BUTTON
+========================================== */
+ function refreshReports() {
+
+    console.log("Refreshing reports...");
+
+    loadReports();
+
+    alert("Reports refreshed successfully!");
+
+}
+
+
+
+
+/* ==========================================
+   LOGOUT
+========================================== */
+
+document
+    .getElementById(
+        "logoutBtn"
+    )
+    .addEventListener(
+        "click",
+        function() {
+
+            localStorage.removeItem(
+                "currentStaffId"
+            );
+
+
+            localStorage.removeItem(
+                "loggedInUser"
+            );
+
+
+            window.location.href =
+                "index.html";
+
+        }
+    );
+
+   
+
+
+/* ==========================================
+   INITIAL LOAD
+========================================== */
+
+loadReports();
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Infrastructure Report Platform</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+
+    font-family: Arial, sans-serif;
+
+    background: linear-gradient(
+        135deg,
+        #e3f2fd,
+        #f5faff
+    );
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+.login-container {
+    width: 100%;
+
+    max-width: 430px;
+
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,0.15);
+}
+
+.logo {
+    width: 75px;
+
+    height: 75px;
+
+    background: #2196d3;
+
+    color: white;
+
+    border-radius: 50%;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 32px;
+
+    font-weight: bold;
+}
+
+h1 {
+    text-align: center;
+
+    color: #2196d3;
+
+    margin-bottom: 5px;
+
+    font-size: 28px;
+}
+
+.subtitle {
+    text-align: center;
+
+    color: #777;
+
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-weight: bold;
+
+    color: #333;
+}
+
+.input-group {
+    position: relative;
+
+    margin-bottom: 20px;
+}
+
+input,
+select {
+    width: 100%;
+
+    padding: 13px;
+
+    border: 2px solid #ddd;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    outline: none;
+}
+
+input:focus,
+select:focus {
+    border-color: #2196d3;
+}
+
+.password-input {
+    padding-right: 50px;
+}
+
+.eye-button {
+    position: absolute;
+
+    right: 8px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    font-size: 20px;
+
+    padding: 5px;
+}
+
+.login-btn {
+    width: 100%;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #2196d3;
+
+    color: white;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    margin-top: 5px;
+}
+
+.login-btn:hover {
+    background: #1976b5;
+}
+
+.forgot-link {
+    display: block;
+
+    text-align: right;
+
+    margin-top: 10px;
+
+    color: #2196d3;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    text-decoration: none;
+}
+
+.forgot-link:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    display: none;
+
+    background: #f8d7da;
+
+    color: #842029;
+
+    padding: 12px;
+
+    border-radius: 7px;
+
+    margin-bottom: 15px;
+
+    text-align: center;
+
+    font-size: 14px;
+}
+
+.success-message {
+    display: none;
+
+    background: #d1e7dd;
+
+    color: #0f5132;
+
+    padding: 12px;
+
+    border-radius: 7px;
+
+    margin-bottom: 15px;
+
+    text-align: center;
+
+    font-size: 14px;
+}
+
+.register-text {
+    text-align: center;
+
+    margin-top: 22px;
+
+    color: #555;
+}
+
+.register-text a {
+    color: #2196d3;
+
+    font-weight: bold;
+
+    text-decoration: none;
+}
+
+.register-text a:hover {
+    text-decoration: underline;
+}
+
+.demo-box {
+    margin-top: 25px;
+
+    padding: 15px;
+
+    background: #f5f5f5;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+
+    color: #555;
+}
+
+.demo-box h3 {
+    margin-top: 0;
+
+    color: #333;
+}
+
+.demo-box p {
+    margin: 6px 0;
+}
+
+
+/* =====================================
+   FORGOT PASSWORD POPUP
+===================================== */
+
+.modal {
+    display: none;
+
+    position: fixed;
+
+    z-index: 1000;
+
+    left: 0;
+
+    top: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    background: rgba(0,0,0,0.5);
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+.modal-content {
+    width: 90%;
+
+    max-width: 400px;
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,0.25);
+}
+
+.modal-content h2 {
+    margin-top: 0;
+
+    color: #2196d3;
+
+    text-align: center;
+}
+
+.close-btn {
+    float: right;
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    color: #777;
+}
+
+.close-btn:hover {
+    color: #000;
+}
+
+.reset-btn {
+    width: 100%;
+
+    padding: 12px;
+
+    background: #2196d3;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+    font-weight: bold;
+}
+
+.reset-btn:hover {
+    background: #1976b5;
+}
+
+.reset-message {
+    display: none;
+
+    padding: 10px;
+
+    border-radius: 7px;
+
+    margin-bottom: 15px;
+
+    text-align: center;
+
+    font-size: 14px;
+}
+
+.reset-error {
+    background: #f8d7da;
+
+    color: #842029;
+}
+
+.reset-success {
+    background: #d1e7dd;
+
+    color: #0f5132;
+}
+
+
+@media (max-width: 500px) {
+
+    .login-container {
+        width: 92%;
+
+        padding: 25px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================
+     LOGIN PAGE
+===================================== -->
+
+<div class="login-container">
+
+
+    <div class="logo">
+       IRP
+    </div>
+
+
+    <h1>
+      Infrastructure Report Platform
+    </h1>
+
+
+    <p class="subtitle">
+        Login to continue
+    </p>
+
+
+    <!-- ERROR -->
+
+    <div
+        id="errorMessage"
+        class="error-message">
+    </div>
+
+
+    <!-- SUCCESS -->
+
+    <div
+        id="successMessage"
+        class="success-message">
+    </div>
+
+
+    <!-- LOGIN TYPE -->
+
+    <div class="input-group">
+
+        <label for="userType">
+            Login As
+        </label>
+
+        <select id="userType">
+
+            <option value="resident">
+                Resident
+            </option>
+
+            <option value="staff">
+                Staff
+            </option>
+
+            <option value="manager">
+                Manager
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <!-- EMAIL -->
+
+    <div class="input-group">
+
+        <label for="email">
+            Email
+        </label>
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Enter your Gmail"
+            autocomplete="email">
+
+    </div>
+
+
+    <!-- PASSWORD -->
+
+    <div class="input-group">
+
+        <label for="password">
+            Password
+        </label>
+
+        <input
+            type="password"
+            id="password"
+            class="password-input"
+            placeholder="Enter your password"
+            autocomplete="current-password">
+
+
+        <button
+            type="button"
+            class="eye-button"
+            id="eyeButton"
+            onclick="togglePassword()">
+
+            👁️
+
+        </button>
+
+    </div>
+
+
+    <!-- FORGOT PASSWORD -->
+
+    <a
+        class="forgot-link"
+        onclick="openForgotPassword()">
+
+        Forgot Password?
+
+    </a>
+
+
+    <!-- LOGIN -->
+
+    <button
+        type="button"
+        class="login-btn"
+        onclick="login()">
+
+        Login
+
+    </button>
+
+
+    <!-- REGISTER -->
+
+    <div class="register-text">
+
+        Don't have an account?
+
+        <a href="register.html">
+            Register
+        </a>
+
+    </div>
+
+
+    <!-- DEMO ACCOUNTS -->
+
+    <div class="demo-box">
+
+        <h3>
+            Demo Login Details
+        </h3>
+
+        <p>
+            <strong>Resident:</strong>
+            resident@gmail.com /
+            resident123
+        </p>
+
+        <p>
+            <strong>Manager:</strong>
+            manager@gmail.com /
+            manager123
+        </p>
+
+        <p>
+            <strong>Arun:</strong>
+            arun@gmail.com /
+            arun123
+        </p>
+
+        <p>
+            <strong>Priya:</strong>
+            priya@gmail.com /
+            priya123
+        </p>
+
+        <p>
+            <strong>Karthik:</strong>
+            karthik@gmail.com /
+            karthik123
+        </p>
+
+        <p>
+            <strong>Divya:</strong>
+            divya@gmail.com /
+            divya123
+        </p>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =====================================
+     FORGOT PASSWORD POPUP
+===================================== -->
+
+<div
+    class="modal"
+    id="forgotModal">
+
+
+    <div class="modal-content">
+
+
+        <span
+            class="close-btn"
+            onclick="closeForgotPassword()">
+
+            &times;
+
+        </span>
+
+
+        <h2>
+            🔐 Forgot Password
+        </h2>
+
+
+        <p>
+            Enter your registered Gmail address
+            and create a new password.
+        </p>
+
+
+        <!-- RESET ERROR -->
+
+        <div
+            id="resetError"
+            class="reset-message reset-error">
+        </div>
+
+
+        <!-- RESET SUCCESS -->
+
+        <div
+            id="resetSuccess"
+            class="reset-message reset-success">
+        </div>
+
+
+        <!-- RESET EMAIL -->
+
+        <div class="input-group">
+
+            <label for="resetEmail">
+                Registered Gmail
+            </label>
+
+            <input
+                type="email"
+                id="resetEmail"
+                placeholder="example@gmail.com">
+
+        </div>
+
+
+        <!-- NEW PASSWORD -->
+
+        <div class="input-group">
+
+            <label for="newPassword">
+                New Password
+            </label>
+
+            <input
+                type="password"
+                id="newPassword"
+                placeholder="Enter new password">
+
+        </div>
+
+
+        <!-- CONFIRM PASSWORD -->
+
+        <div class="input-group">
+
+            <label for="confirmPassword">
+                Confirm Password
+            </label>
+
+            <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm new password">
+
+        </div>
+
+
+        <button
+            class="reset-btn"
+            type="button"
+            onclick="resetPassword()">
+
+            Reset Password
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+/* ==========================================
+   STAFF ACCOUNTS
+========================================== */
+
+const staffAccounts = [
+
+    {
+        email: "arun@gmail.com",
+        password: "arun123",
+        id: "STAFF001",
+        name: "Arun"
+    },
+
+    {
+        email: "priya@gmail.com",
+        password: "priya123",
+        id: "STAFF002",
+        name: "Priya"
+    },
+
+    {
+        email: "karthik@gmail.com",
+        password: "karthik123",
+        id: "STAFF003",
+        name: "Karthik"
+    },
+
+    {
+        email: "divya@gmail.com",
+        password: "divya123",
+        id: "STAFF004",
+        name: "Divya"
+    }
+
+];
+
+
+
+/* ==========================================
+   RESIDENT ACCOUNT
+========================================== */
+
+const residentAccount = {
+
+    email: "resident@gmail.com",
+
+    password: "resident123"
+
+};
+
+
+
+/* ==========================================
+   MANAGER ACCOUNT
+========================================== */
+
+const managerAccount = {
+
+    email: "manager@gmail.com",
+
+    password: "manager123"
+
+};
+
+
+
+/* ==========================================
+   TOGGLE PASSWORD
+========================================== */
+
+function togglePassword() {
+
+    const password =
+        document.getElementById("password");
+
+    const eyeButton =
+        document.getElementById("eyeButton");
+
+
+    if (password.type === "password") {
+
+        password.type = "text";
+
+        eyeButton.innerHTML = "🙈";
+
+    }
+
+    else {
+
+        password.type = "password";
+
+        eyeButton.innerHTML = "👁️";
+
+    }
+
+}
+
+
+
+/* ==========================================
+   SHOW ERROR
+========================================== */
+
+function showError(message) {
+
+    const error =
+        document.getElementById("errorMessage");
+
+    const success =
+        document.getElementById("successMessage");
+
+
+    success.style.display = "none";
+
+    error.innerHTML = message;
+
+    error.style.display = "block";
+
+}
+
+
+
+/* ==========================================
+   SHOW SUCCESS
+========================================== */
+
+function showSuccess(message) {
+
+    const error =
+        document.getElementById("errorMessage");
+
+    const success =
+        document.getElementById("successMessage");
+
+
+    error.style.display = "none";
+
+    success.innerHTML = message;
+
+    success.style.display = "block";
+
+}
+
+
+
+/* ==========================================
+   LOGIN
+========================================== */
+
+function login() {
+
+    const userType =
+        document.getElementById("userType").value;
+
+
+    const email =
+        document.getElementById("email")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const password =
+        document.getElementById("password")
+        .value
+        .trim();
+
+
+    if (
+        email === "" ||
+        password === ""
+    ) {
+
+        showError(
+            "Please enter both email and password."
+        );
+
+        return;
+
+    }
+
+
+    const gmailPattern =
+        /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+
+
+    if (!gmailPattern.test(email)) {
+
+        showError(
+            "Please enter a valid Gmail address."
+        );
+
+        return;
+
+    }
+
+
+
+    /* ======================================
+       STAFF LOGIN
+    ====================================== */
+
+    if (userType === "staff") {
+
+        const staff =
+            staffAccounts.find(
+                function(account) {
+
+                    return (
+                        account.email === email &&
+                        account.password === password
+                    );
+
+                }
+            );
+
+
+        if (!staff) {
+
+            showError(
+                "Incorrect staff email or password."
+            );
+
+            return;
+
+        }
+
+
+        localStorage.setItem(
+            "currentStaffId",
+            staff.id
+        );
+
+
+        localStorage.setItem(
+            "currentStaffName",
+            staff.name
+        );
+
+
+        localStorage.setItem(
+            "loggedInUser",
+            staff.email
+        );
+
+
+        localStorage.setItem(
+            "userRole",
+            "staff"
+        );
+
+
+        showSuccess(
+            "Login successful!"
+        );
+
+
+        setTimeout(
+            function() {
+
+                window.location.href =
+                    "staff.html";
+
+            },
+            500
+        );
+
+
+        return;
+
+    }
+
+
+
+    /* ======================================
+       MANAGER LOGIN
+    ====================================== */
+
+    if (userType === "manager") {
+
+        if (
+            email === managerAccount.email &&
+            password === managerAccount.password
+        ) {
+
+            localStorage.setItem(
+                "loggedInUser",
+                email
+            );
+
+
+            localStorage.setItem(
+                "userRole",
+                "manager"
+            );
+
+
+            showSuccess(
+                "Login successful!"
+            );
+
+
+            setTimeout(
+                function() {
+
+                    window.location.href =
+                        "manager.html";
+
+                },
+                500
+            );
+
+
+            return;
+
+        }
+
+
+        showError(
+            "Incorrect manager email or password."
+        );
+
+
+        return;
+
+    }
+
+
+
+    /* ======================================
+       RESIDENT LOGIN
+    ====================================== */
+
+    if (userType === "resident") {
+
+        let validResident =
+            (
+                email === residentAccount.email &&
+                password === residentAccount.password
+            );
+
+
+        const registeredUsers =
+            JSON.parse(
+                localStorage.getItem(
+                    "registeredUsers"
+                ) || "[]"
+            );
+
+
+        const registeredUser =
+            registeredUsers.find(
+                function(user) {
+
+                    return (
+                        user.email === email &&
+                        user.password === password
+                    );
+
+                }
+            );
+
+
+        if (
+            validResident ||
+            registeredUser
+        ) {
+
+            localStorage.setItem(
+                "loggedInUser",
+                email
+            );
+
+
+            localStorage.setItem(
+                "userRole",
+                "resident"
+            );
+
+
+            showSuccess(
+                "Login successful!"
+            );
+
+
+            setTimeout(
+                function() {
+
+                    window.location.href =
+                        "resident.html";
+
+                },
+                500
+            );
+
+
+            return;
+
+        }
+
+
+        showError(
+            "Incorrect resident email or password."
+        );
+
+
+        return;
+
+    }
+
+}
+
+
+
+/* ==========================================
+   OPEN FORGOT PASSWORD
+========================================== */
+
+function openForgotPassword() {
+
+    document.getElementById(
+        "forgotModal"
+    ).style.display = "flex";
+
+
+    document.getElementById(
+        "resetEmail"
+    ).value = "";
+
+
+    document.getElementById(
+        "newPassword"
+    ).value = "";
+
+
+    document.getElementById(
+        "confirmPassword"
+    ).value = "";
+
+
+    document.getElementById(
+        "resetError"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "resetSuccess"
+    ).style.display = "none";
+
+}
+
+
+
+/* ==========================================
+   CLOSE FORGOT PASSWORD
+========================================== */
+
+function closeForgotPassword() {
+
+    document.getElementById(
+        "forgotModal"
+    ).style.display = "none";
+
+}
+
+
+
+/* ==========================================
+   RESET PASSWORD
+========================================== */
+
+function resetPassword() {
+
+    const email =
+        document.getElementById(
+            "resetEmail"
+        )
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const newPassword =
+        document.getElementById(
+            "newPassword"
+        )
+        .value
+        .trim();
+
+
+    const confirmPassword =
+        document.getElementById(
+            "confirmPassword"
+        )
+        .value
+        .trim();
+
+
+    const resetError =
+        document.getElementById(
+            "resetError"
+        );
+
+
+    const resetSuccess =
+        document.getElementById(
+            "resetSuccess"
+        );
+
+
+    resetError.style.display =
+        "none";
+
+    resetSuccess.style.display =
+        "none";
+
+
+
+    /* EMPTY CHECK */
+
+    if (
+        email === "" ||
+        newPassword === "" ||
+        confirmPassword === ""
+    ) {
+
+        resetError.innerHTML =
+            "Please fill in all fields.";
+
+        resetError.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+
+    /* GMAIL CHECK */
+
+    const gmailPattern =
+        /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+
+
+    if (
+        !gmailPattern.test(email)
+    ) {
+
+        resetError.innerHTML =
+            "Please enter a valid Gmail address.";
+
+        resetError.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+
+    /* PASSWORD LENGTH */
+
+    if (
+        newPassword.length < 6
+    ) {
+
+        resetError.innerHTML =
+            "Password must contain at least 6 characters.";
+
+        resetError.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+
+    /* PASSWORD MATCH */
+
+    if (
+        newPassword !== confirmPassword
+    ) {
+
+        resetError.innerHTML =
+            "Passwords do not match.";
+
+        resetError.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+
+    /* ======================================
+       STAFF PASSWORD RESET
+    ====================================== */
+
+    const staff =
+        staffAccounts.find(
+            function(account) {
+
+                return account.email === email;
+
+            }
+        );
+
+
+    if (staff) {
+
+        staff.password =
+            newPassword;
+
+
+        resetSuccess.innerHTML =
+            "Password changed successfully! You can now login.";
+
+        resetSuccess.style.display =
+            "block";
+
+
+        return;
+
+    }
+
+
+
+    /* ======================================
+       MANAGER PASSWORD RESET
+    ====================================== */
+
+    if (
+        email === managerAccount.email
+    ) {
+
+        managerAccount.password =
+            newPassword;
+
+
+        resetSuccess.innerHTML =
+            "Password changed successfully! You can now login.";
+
+        resetSuccess.style.display =
+            "block";
+
+
+        return;
+
+    }
+
+
+
+    /* ======================================
+       RESIDENT PASSWORD RESET
+    ====================================== */
+
+    if (
+        email === residentAccount.email
+    ) {
+
+        residentAccount.password =
+            newPassword;
+
+
+        resetSuccess.innerHTML =
+            "Password changed successfully! You can now login.";
+
+        resetSuccess.style.display =
+            "block";
+
+
+        return;
+
+    }
+
+
+
+    /* ======================================
+       REGISTERED USER PASSWORD RESET
+    ====================================== */
+
+    let registeredUsers =
+        JSON.parse(
+            localStorage.getItem(
+                "registeredUsers"
+            ) || "[]"
+        );
+
+
+    const userIndex =
+        registeredUsers.findIndex(
+            function(user) {
+
+                return user.email === email;
+
+            }
+        );
+
+
+    if (userIndex !== -1) {
+
+        registeredUsers[userIndex].password =
+            newPassword;
+
+
+        localStorage.setItem(
+            "registeredUsers",
+            JSON.stringify(
+                registeredUsers
+            )
+        );
+
+
+        resetSuccess.innerHTML =
+            "Password changed successfully! You can now login.";
+
+        resetSuccess.style.display =
+            "block";
+
+
+        return;
+
+    }
+
+
+
+    /* ACCOUNT NOT FOUND */
+
+    resetError.innerHTML =
+        "No account found with this Gmail address.";
+
+    resetError.style.display =
+        "block";
+
+}
+
+
+
+/* ==========================================
+   ENTER KEY LOGIN
+========================================== */
+
+document
+    .getElementById("password")
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                login();
+
+            }
+
+        }
+    );
+
+
+
+/* ==========================================
+   CLOSE MODAL WHEN CLICKING OUTSIDE
+========================================== */
+
+window.addEventListener(
+    "click",
+    function(event) {
+
+        const modal =
+            document.getElementById(
+                "forgotModal"
+            );
+
+
+        if (
+            event.target === modal
+        ) {
+
+            closeForgotPassword();
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>
