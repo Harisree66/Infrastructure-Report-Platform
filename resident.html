@@ -2,120 +2,225 @@
 <html lang="en">
 
 <head>
-   
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Resident Dashboard</title>
-    <link rel="stylesheet" href="css/style.css">
 
     <style>
+
+        * {
+            box-sizing: border-box;
+        }
 
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #f2f7fb;
+            background: #eef6fc;
+            color: #111;
         }
+
+        /* HEADER */
 
         header {
             background: #3498db;
             color: white;
-            padding: 20px;
+            padding: 35px 30px;
         }
 
-        header h1 {
-            margin: 0;
-        }
-
-        .top {
+        .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
+        header h1 {
+            margin: 0;
+            font-size: 45px;
+        }
+
         .logout {
-            width: auto;
-            background: #e74c3c;
-            padding: 10px 18px;
-            border: none;
-            border-radius: 6px;
+            background: #f44336;
             color: white;
+            border: none;
+            padding: 15px 28px;
+            font-size: 22px;
+            border-radius: 10px;
             cursor: pointer;
         }
 
-        .container {
-            width: 90%;
-            max-width: 1100px;
-            margin: 30px auto;
+        .logout:hover {
+            background: #d32f2f;
         }
 
-        .welcome {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
+        /* MAIN */
+
+        .container {
+            width: 92%;
+            max-width: 1100px;
+            margin: 45px auto;
         }
+
+        /* WELCOME CARD */
+
+        .welcome-card {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+
+        .welcome-card h2 {
+            font-size: 36px;
+            margin-top: 0;
+        }
+
+        .welcome-card p {
+            font-size: 24px;
+        }
+
+        #userEmail {
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        /* REPORT BUTTON */
 
         .report-button {
             display: inline-block;
             background: #3498db;
             color: white;
-            padding: 14px 22px;
-            border-radius: 8px;
             text-decoration: none;
-            margin-bottom: 25px;
-        }
-
-        .reports {
-            background: white;
-            padding: 20px;
+            padding: 18px 30px;
             border-radius: 12px;
+            font-size: 24px;
+            margin-bottom: 35px;
         }
 
-        .report-card {
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 18px;
-            margin-top: 15px;
+        .report-button:hover {
+            background: #2583c4;
         }
+
+        /* REPORT CARD */
+
+        .reports-card {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+        }
+
+        .reports-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .reports-header h2 {
+            font-size: 36px;
+            margin-top: 0;
+        }
+
+        .refresh {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        .refresh:hover {
+            background: #2583c4;
+        }
+
+        /* EACH REPORT */
+
+        .report {
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 22px;
+            margin-top: 20px;
+            background: #fafafa;
+        }
+
+        .report h3 {
+            color: #3498db;
+            margin-top: 0;
+        }
+
+        .report p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        /* STATUS */
 
         .status {
+            display: inline-block;
+            padding: 7px 15px;
+            border-radius: 20px;
             font-weight: bold;
         }
 
         .pending {
-            color: orange;
+            background: #fff3cd;
+            color: #856404;
         }
 
-        .progress {
-            color: #3498db;
+        .assigned {
+            background: #cfe2ff;
+            color: #084298;
+        }
+
+        .inprogress {
+            background: #cff4fc;
+            color: #055160;
         }
 
         .completed {
-            color: green;
+            background: #d1e7dd;
+            color: #0f5132;
         }
 
-        .no-reports {
+        .rejected {
+            background: #f8d7da;
+            color: #842029;
+        }
+
+        /* PHOTO */
+
+        .report-photo {
+            width: 250px;
+            max-width: 100%;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        /* NO REPORT */
+
+        .no-report {
+            text-align: center;
             color: #777;
+            font-size: 20px;
+            padding: 30px;
         }
 
     </style>
-
 </head>
+
 
 <body>
 
+<!-- HEADER -->
+
 <header>
 
-    <div class="top">
+    <div class="header-content">
 
         <h1>Resident Dashboard</h1>
 
-        <button class="logout"
-                onclick="logout()">
+        <button class="logout" onclick="logout()">
             Logout
         </button>
 
@@ -124,40 +229,532 @@
 </header>
 
 
+<!-- MAIN -->
+
 <div class="container">
 
 
-    <div class="welcome">
+    <!-- WELCOME -->
 
-        <h2>Welcome Resident</h2>
+    <div class="welcome-card">
+
+        <h2>
+            Welcome <span id="residentName">Resident</span>
+        </h2>
 
         <p>
             Logged in as:
-            <strong id="userEmail"></strong>
+            <span id="userEmail">Loading...</span>
         </p>
 
     </div>
 
 
-    <a href="report.html"
-       class="report-button">
+    <!-- REPORT BUTTON -->
 
+    <a href="report.html" class="report-button">
         + Report an Issue
-
     </a>
 
 
-    <div class="reports">
+    <!-- REPORT HISTORY -->
 
-        <h2>My Reports</h2>
+    <div class="reports-card">
 
-        <div id="reportList"></div>
+        <div class="reports-header">
+
+            <h2>My Reports</h2>
+
+            <button class="refresh" onclick="loadReports()">
+                🔄 Refresh
+            </button>
+
+        </div>
+
+        <div id="reportHistory">
+
+            <p class="no-report">
+                Loading reports...
+            </p>
+
+        </div>
 
     </div>
 
+
 </div>
 
-<script src="js/resident.js"></script>
+
+<script>
+
+/* =====================================================
+   GET LOGGED-IN USER
+   ===================================================== */
+
+function getCurrentUser() {
+
+    let user = localStorage.getItem("currentUser");
+
+    if (!user) {
+
+        user = localStorage.getItem("loggedInUser");
+
+    }
+
+    if (!user) {
+
+        user = localStorage.getItem("user");
+
+    }
+
+    if (!user) {
+
+        return null;
+
+    }
+
+    try {
+
+        return JSON.parse(user);
+
+    }
+
+    catch (error) {
+
+        return {
+            email: user
+        };
+
+    }
+
+}
+
+
+/* =====================================================
+   DISPLAY USER
+   ===================================================== */
+
+function loadUser() {
+
+    const user = getCurrentUser();
+
+    const nameElement =
+        document.getElementById("residentName");
+
+    const emailElement =
+        document.getElementById("userEmail");
+
+
+    if (!user) {
+
+        nameElement.textContent = "Resident";
+
+        emailElement.textContent =
+            "Not available";
+
+        return;
+
+    }
+
+
+    /* GET EMAIL */
+
+    const email =
+        user.email ||
+        user.gmail ||
+        user.userEmail ||
+        user.username ||
+        "";
+
+
+    /* GET NAME */
+
+    const name =
+        user.name ||
+        user.fullName ||
+        user.username ||
+        "Resident";
+
+
+    nameElement.textContent = name;
+
+    emailElement.textContent =
+        email || "Resident";
+
+}
+
+
+/* =====================================================
+   LOAD REPORTS
+   ===================================================== */
+
+function loadReports() {
+
+    const history =
+        document.getElementById("reportHistory");
+
+
+    let reports = [];
+
+
+    try {
+
+        reports =
+            JSON.parse(
+                localStorage.getItem("reports")
+            ) || [];
+
+    }
+
+    catch (error) {
+
+        console.log("Error reading reports");
+
+        reports = [];
+
+    }
+
+
+    console.log("ALL REPORTS:", reports);
+
+
+    /* GET CURRENT USER */
+
+    const user =
+        getCurrentUser();
+
+
+    let email = "";
+
+
+    if (user) {
+
+        email =
+            (
+                user.email ||
+                user.gmail ||
+                user.userEmail ||
+                user.username ||
+                ""
+            ).toLowerCase();
+
+    }
+
+
+    console.log("CURRENT USER EMAIL:", email);
+
+
+    /* =================================================
+       FILTER USER REPORTS
+       ================================================= */
+
+    let myReports = reports.filter(function(report) {
+
+        const reportEmail =
+            (
+                report.email ||
+                report.gmail ||
+                report.userEmail ||
+                report.residentEmail ||
+                report.reportedBy ||
+                ""
+            ).toLowerCase();
+
+
+        return reportEmail === email;
+
+    });
+
+
+    /*
+       If the reports were created by your previous
+       version and do not contain an email field,
+       display them so they are not lost.
+    */
+
+    if (
+        myReports.length === 0 &&
+        reports.length > 0
+    ) {
+
+        const reportsWithoutEmail =
+            reports.filter(function(report) {
+
+                return !(
+                    report.email ||
+                    report.gmail ||
+                    report.userEmail ||
+                    report.residentEmail ||
+                    report.reportedBy
+                );
+
+            });
+
+
+        if (reportsWithoutEmail.length > 0) {
+
+            myReports =
+                reportsWithoutEmail;
+
+        }
+
+    }
+
+
+    /* =================================================
+       NO REPORTS
+       ================================================= */
+
+    if (myReports.length === 0) {
+
+        history.innerHTML = `
+
+            <div class="no-report">
+
+                <h3>No Reports Yet</h3>
+
+                <p>
+                    You have not submitted any reports.
+                </p>
+
+                <p>
+                    Click "Report an Issue" to submit one.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    /* =================================================
+       DISPLAY REPORTS
+       ================================================= */
+
+    history.innerHTML = "";
+
+
+    /*
+       Newest report first
+    */
+
+    myReports.reverse();
+
+
+    myReports.forEach(function(report, index) {
+
+
+        const reportNumber =
+            report.id ||
+            report.reportId ||
+            index + 1;
+
+
+        const problem =
+            report.problem ||
+            report.issue ||
+            report.title ||
+            "Infrastructure Issue";
+
+
+        const location =
+            report.location ||
+            report.address ||
+            "Not specified";
+
+
+        const description =
+            report.description ||
+            report.details ||
+            "No description";
+
+
+        const date =
+            report.date ||
+            report.createdAt ||
+            "Not available";
+
+
+        const staff =
+            report.assignedStaff ||
+            report.staff ||
+            report.assignedTo ||
+            "Not Assigned";
+
+
+        const status =
+            report.status ||
+            "Pending";
+
+
+        /* STATUS CLASS */
+
+        let statusClass =
+            status.toLowerCase()
+                  .replace(/\s+/g, "");
+
+
+        if (statusClass === "inprogress") {
+
+            statusClass = "inprogress";
+
+        }
+
+        else if (statusClass === "assigned") {
+
+            statusClass = "assigned";
+
+        }
+
+        else if (statusClass === "completed") {
+
+            statusClass = "completed";
+
+        }
+
+        else if (statusClass === "rejected") {
+
+            statusClass = "rejected";
+
+        }
+
+        else {
+
+            statusClass = "pending";
+
+        }
+
+
+        /* CREATE REPORT */
+
+        const reportDiv =
+            document.createElement("div");
+
+
+        reportDiv.className =
+            "report";
+
+
+        reportDiv.innerHTML = `
+
+            <h3>
+                Report #${reportNumber}
+            </h3>
+
+            <p>
+                <strong>Problem:</strong>
+                ${problem}
+            </p>
+
+            <p>
+                <strong>Location:</strong>
+                ${location}
+            </p>
+
+            <p>
+                <strong>Description:</strong>
+                ${description}
+            </p>
+
+            <p>
+                <strong>Date:</strong>
+                ${date}
+            </p>
+
+            <p>
+                <strong>Assigned Staff:</strong>
+                ${staff}
+            </p>
+
+            <p>
+                <strong>Status:</strong>
+
+                <span class="status ${statusClass}">
+                    ${status}
+                </span>
+
+            </p>
+
+        `;
+
+
+        /* =================================================
+           PHOTO
+           ================================================= */
+
+        const photo =
+            report.photo ||
+            report.image ||
+            report.photoUrl;
+
+
+        if (photo) {
+
+            const image =
+                document.createElement("img");
+
+
+            image.src = photo;
+
+            image.className =
+                "report-photo";
+
+            image.alt =
+                "Uploaded Report Photo";
+
+
+            reportDiv.appendChild(image);
+
+        }
+
+
+        history.appendChild(reportDiv);
+
+    });
+
+}
+
+
+/* =====================================================
+   LOGOUT
+   ===================================================== */
+
+function logout() {
+
+    localStorage.removeItem("currentUser");
+
+    localStorage.removeItem("loggedInUser");
+
+    localStorage.removeItem("user");
+
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+/* =====================================================
+   PAGE LOAD
+   ===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        loadUser();
+
+        loadReports();
+
+    }
+);
+
+</script>
+
 
 </body>
+
 </html>
